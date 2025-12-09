@@ -1,0 +1,942 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Employer Brand & Recruitment Marketing Mini Audit — Thompson & Co Collective</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Fonts: keep the editorial Noto Serif Display, soften weights -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Brand core */
+      --tcc-black: #181817;           /* requested hex for dark elements */
+      --tcc-white: #ffffff;
+      --tcc-ivory: #f9f7f4;           /* soft page background */
+      --tcc-magenta: #c6269e;
+      --tcc-magenta-dark: #a02088;
+
+      /* Gold accents */
+      --gold-100: #f3eee6;            /* softened for calmer look */
+      --gold-300: #d6b464;            /* richer gold for CTA band */
+
+      /* Bands colors */
+      --amber-500: #f59e0b;           /* Developing */
+      --emerald-500: #10b981;         /* Advanced */
+
+      /* Neutrals on light */
+      --grey-50: #f9fafb;
+      --grey-100: #f3f4f6;
+      --grey-300: #e5e7eb;
+      --grey-600: #4b5563;
+      --grey-800: #1f2937;
+      --grey-900: #111827;
+
+      /* UI */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --shadow-soft: 0 18px 45px rgba(11, 13, 16, 0.12);
+      --shadow-subtle: 0 10px 30px rgba(15, 23, 42, 0.10);
+
+      --font-main: "Noto Serif Display", serif;
+    }
+
+    /* Reset */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:var(--font-main);
+      color:var(--tcc-black);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(198, 38, 158, 0.08), transparent 45%),
+        radial-gradient(circle at 85% 10%, rgba(214, 180, 100, 0.10), transparent 45%),
+        var(--tcc-ivory);
+      min-height:100vh;
+      padding:10px 0 60px;
+    }
+    a{color:inherit;text-decoration:none}
+
+    .page-frame{max-width:1120px;margin:0 auto;padding:12px 20px 80px}
+
+    /* Header: light, breathable */
+    .site-header{
+      display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;
+      background:var(--tcc-white);color:var(--tcc-black);padding:14px 16px;border-radius:var(--radius-md);
+      border:1px solid var(--grey-300);box-shadow:var(--shadow-subtle);
+      position:sticky;top:10px;z-index:10;backdrop-filter:blur(10px)
+    }
+    .brand-lockup{display:flex;align-items:center;gap:10px}
+    .brand-mark{
+      width:44px;height:44px;border-radius:999px;border:1px solid rgba(24,24,24,0.08);
+      background:linear-gradient(135deg, var(--tcc-magenta), var(--tcc-magenta-dark));
+      display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;letter-spacing:0.06em;
+      box-shadow:0 14px 30px rgba(198, 38, 158, 0.28)
+    }
+    .brand-text-main{font-weight:600;font-size:1.02rem;letter-spacing:0.10em;text-transform:uppercase}
+    .brand-text-sub{font-size:0.78rem;opacity:0.70;text-transform:uppercase;letter-spacing:0.14em}
+
+    .header-cta{display:flex;align-items:center;gap:10px}
+    .button-primary{
+      border:none;cursor:pointer;font-size:0.86rem;font-weight:600;padding:9px 18px;border-radius:999px;
+      background:var(--tcc-magenta);color:#fff;display:inline-flex;align-items:center;gap:6px;
+      box-shadow:0 12px 28px rgba(198, 38, 158, 0.32);transition:transform .15s ease,box-shadow .15s ease,background .15s ease;
+      text-transform:uppercase;letter-spacing:0.12em
+    }
+    .button-primary:hover{background:var(--tcc-magenta-dark);transform:translateY(-1px);box-shadow:0 16px 40px rgba(198,38,158,0.40)}
+    .button-ghost{
+      border-radius:999px;border:1px solid var(--grey-300);background:transparent;color:var(--tcc-black);
+      font-size:0.78rem;padding:8px 14px;text-transform:uppercase;letter-spacing:0.14em;cursor:pointer;
+      transition:background .15s ease,border-color .15s ease,transform .15s ease;
+      display:inline-flex;align-items:center;gap:6px
+    }
+    .button-ghost:hover{background:rgba(255,255,255,0.65);border-color:var(--tcc-magenta);transform:translateY(-1px)}
+
+    /* Hero: light card with tidy right rail */
+    .hero{
+      display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1.1fr);gap:26px;
+      padding:26px;border-radius:var(--radius-lg);
+      background:var(--tcc-white);color:var(--tcc-black);
+      box-shadow:var(--shadow-soft);border:1px solid var(--grey-300);margin-bottom:28px;position:relative;overflow:hidden
+    }
+    .hero::before{
+      content:"";position:absolute;inset:0;
+      background:radial-gradient(circle at 85% 10%, rgba(198,38,158,0.07), transparent 55%);
+      pointer-events:none
+    }
+    .hero-left,.hero-right{position:relative;z-index:1}
+    .eyebrow{font-weight:600;font-size:0.78rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--tcc-magenta);margin-bottom:10px}
+    .hero-title{
+      font-weight:600;font-size:clamp(2rem,3.2vw,2.6rem);line-height:1.08;margin-bottom:12px;color:var(--tcc-black)
+    }
+    .hero-highlight{color:var(--tcc-magenta)}
+    .hero-subtitle{font-size:1rem;line-height:1.6;color:var(--grey-800);max-width:42rem;margin-bottom:18px}
+    .hero-subtitle strong{color:var(--tcc-black);font-weight:600}
+    .hero-cta-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+    .hero-meta{display:flex;flex-wrap:wrap;gap:10px 18px;font-size:0.82rem;color:var(--grey-700)}
+    .hero-meta .divider{color:var(--grey-300)}
+
+    /* Score card: simpler layout with progress bar */
+    .hero-right{display:flex;flex-direction:column;gap:16px}
+    .score-card{
+      border-radius:var(--radius-md);border:1px solid var(--grey-300);background:var(--gold-100);
+      padding:16px 18px;box-shadow:var(--shadow-subtle);color:var(--tcc-black);display:flex;flex-direction:column;gap:10px
+    }
+    .score-card-inline{margin-top:12px;background:var(--tcc-white)}
+    .score-card-inline .score-footnote{font-size:0.88rem}
+    .score-label{font-size:0.75rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--grey-800);margin-bottom:2px}
+    .score-main{display:flex;align-items:baseline;gap:10px}
+    .score-value{font-size:2rem;font-weight:600;color:var(--tcc-black)}
+    .score-max{font-size:0.92rem;color:var(--grey-600)}
+    .score-band-pill{
+      display:inline-flex;align-items:center;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.14em;
+      padding:6px 10px;border-radius:999px;border:1px solid var(--grey-300);margin-left:auto;color:var(--tcc-black);background:var(--tcc-white)
+    }
+    .score-band-pill.nascent{border-color:var(--tcc-magenta);color:var(--tcc-magenta)}
+    .score-band-pill.developing{border-color:var(--amber-500);color:var(--amber-500)}
+    .score-band-pill.advanced{border-color:var(--emerald-500);color:var(--emerald-500)}
+    .score-footnote{font-size:0.9rem;color:var(--grey-800);margin-top:2px}
+
+    .score-meter{background:var(--tcc-white);border-radius:999px;border:1px solid var(--grey-300);height:12px;overflow:hidden}
+    .score-meter-fill{height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg,var(--tcc-magenta),var(--amber-500),var(--emerald-500));transition:width .25s ease}
+
+    .band-grid{margin-top:4px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;font-size:0.82rem}
+    .band-item{
+      position:relative;border-radius:12px;padding:10px 10px 10px 14px;border:1px solid var(--grey-300);background:linear-gradient(135deg,#ffffff,rgba(255,255,255,0.92));color:var(--grey-800);
+      box-shadow:0 6px 16px rgba(15,23,42,0.06)
+    }
+    .band-item::before{
+      content:"";position:absolute;left:10px;top:12px;width:6px;height:24px;border-radius:999px;background:var(--tcc-magenta);
+      opacity:0.6
+    }
+    .band-item:nth-child(2)::before{background:var(--amber-500)}
+    .band-item:nth-child(3)::before{background:var(--emerald-500)}
+    .band-item strong{display:block;font-size:0.74rem;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px;color:var(--tcc-black)}
+
+    /* Shared section header */
+    .section{margin-top:32px}
+    .section-header{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:18px}
+    .section-eyebrow{font-size:0.78rem;letter-spacing:0.20em;text-transform:uppercase;color:var(--tcc-magenta);margin-bottom:6px}
+    .section-title{font-size:1.6rem;line-height:1.22;color:var(--tcc-black);font-weight:600}
+    .section-kicker{font-size:0.96rem;color:var(--grey-700);max-width:36rem;line-height:1.55}
+    .pill-meta{
+      font-size:0.78rem;color:var(--grey-700);border-radius:999px;border:1px solid var(--grey-300);padding:6px 10px;background:var(--tcc-white);font-weight:600
+    }
+
+    /* Bands cards: bright, readable */
+    .bands-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .band-card{
+      border-radius:var(--radius-md);background:var(--tcc-white);border:1px solid var(--grey-300);
+      padding:16px;box-shadow:0 14px 30px rgba(15, 23, 42, 0.08);position:relative;overflow:hidden
+    }
+    .band-card::before{
+      content:"";position:absolute;inset:0;background:radial-gradient(circle at top right, rgba(198,38,158,0.05), transparent 55%);
+      opacity:0;transition:opacity .2s ease;pointer-events:none
+    }
+    .band-card:hover::before{opacity:1}
+    .band-tag{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.16em;margin-bottom:4px;color:var(--tcc-magenta)}
+    .band-range{font-size:0.9rem;font-weight:600;margin-bottom:6px;color:var(--tcc-black)}
+    .band-copy{font-size:0.9rem;line-height:1.6;color:var(--grey-700);margin-bottom:8px}
+    .band-bullets{list-style:none;font-size:0.86rem;color:var(--grey-700)}
+    .band-bullets li{position:relative;padding-left:14px;margin-bottom:4px}
+    .band-bullets li::before{
+      content:"";position:absolute;left:0;top:0.55em;width:6px;height:6px;border-radius:999px;background:var(--tcc-magenta);opacity:0.85
+    }
+
+    /* Audit shell: light card, clear inputs */
+    .audit-shell{
+      border-radius:var(--radius-lg);padding:22px 20px 24px;background:var(--tcc-white);
+      box-shadow:0 22px 60px rgba(15, 23, 42, 0.12);border:1px solid var(--grey-300);
+      display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1.8fr);gap:26px
+    }
+    .audit-intro{border-right:1px solid var(--grey-100);padding-right:20px}
+    .audit-intro h3{font-size:1.2rem;margin-bottom:10px;color:var(--tcc-black);font-weight:600}
+    .audit-intro p{font-size:0.95rem;line-height:1.6;color:var(--grey-700);margin-bottom:12px}
+    .audit-highlights{font-size:0.86rem;border-radius:14px;background:var(--tcc-ivory);padding:10px 12px;border:1px dashed rgba(148,163,184,0.8);margin-bottom:12px}
+    .audit-highlights ul{list-style:none}
+    .audit-highlights li{margin-bottom:4px}
+    .audit-meta{font-size:0.86rem;color:var(--grey-700)}
+    .audit-meta strong{color:var(--tcc-black);font-weight:600}
+
+    .audit-form{display:flex;flex-direction:column;gap:14px}
+    .field-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .field{display:flex;flex-direction:column;gap:6px;font-size:0.9rem}
+    .field label{font-weight:500;color:var(--tcc-black)}
+    .field small{font-size:0.78rem;color:var(--grey-700)}
+    .field input,.field select,.field textarea{
+      border-radius:999px;border:1px solid var(--grey-300);padding:10px 12px;font-size:0.95rem;outline:none;background:var(--grey-50)
+    }
+    .field textarea{border-radius:12px;resize:vertical;min-height:72px}
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--tcc-magenta);box-shadow:0 0 0 1px rgba(198,38,158,0.30);background:var(--tcc-white)}
+
+    .question-group{
+      margin-top:6px;border-radius:16px;border:1px solid var(--grey-100);background:var(--grey-50);padding:10px 12px;max-height:360px;overflow:auto
+    }
+    .question-header{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+    .question-header-title{font-size:0.86rem;font-weight:600;color:var(--tcc-black)}
+    .question-header-meta{font-size:0.82rem;color:var(--grey-700)}
+    .progress-shell{flex:1 1 160px;max-width:240px;background:var(--tcc-white);border:1px solid var(--grey-300);border-radius:12px;padding:8px 10px;box-shadow:var(--shadow-subtle)}
+    .progress-top{display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;color:var(--grey-800);margin-bottom:6px}
+    .progress-bar{height:10px;border-radius:999px;background:var(--grey-100);overflow:hidden;border:1px solid var(--grey-300)}
+    .progress-fill{height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg,var(--tcc-magenta),var(--amber-500));transition:width .25s ease}
+    .question-row{
+      border-radius:10px;padding:8px 10px;background:var(--tcc-white);display:grid;grid-template-columns:minmax(0,3fr) auto;
+      gap:8px;align-items:center;margin-bottom:6px;border:1px solid rgba(209,213,219,0.8)
+    }
+    .question-text{font-size:0.9rem;color:var(--grey-800)}
+    .ScaleOptions{display:inline-flex;gap:6px;align-items:center;font-size:0.9rem}
+    .scale-pill{
+      position:relative;display:inline-flex;align-items:center;justify-content:center;font-size:0.88rem;border-radius:999px;padding:6px 10px;
+      border:1px solid var(--grey-300);cursor:pointer;background:var(--grey-50);min-width:36px;text-align:center;transition:background .15s ease,border-color .15s ease,color .15s ease
+    }
+    .scale-pill input{position:absolute;opacity:0;pointer-events:none}
+    .scale-pill span{pointer-events:none}
+    .scale-pill.selected{background:var(--tcc-magenta);border-color:var(--tcc-magenta-dark);color:#fff}
+    .scale-legend{font-size:0.86rem;color:var(--grey-700);margin-top:4px}
+
+    .form-footer{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:6px;flex-wrap:wrap}
+    .form-disclaimer{font-size:0.86rem;color:var(--grey-700);max-width:28rem}
+    .score-live{text-align:right;font-size:0.9rem;color:var(--grey-700)}
+    .score-live strong{font-weight:600;color:var(--tcc-black)}
+    .score-live .score-band-label{font-weight:600;color:var(--tcc-magenta)}
+
+    .save-hint{font-size:0.82rem;color:var(--grey-700);margin-top:4px}
+    .button-tertiary{
+      border:none;background:transparent;color:var(--tcc-magenta);font-weight:600;cursor:pointer;
+      text-decoration:underline;font-size:0.85rem;padding:4px 6px;border-radius:6px;transition:background .15s ease
+    }
+    .button-tertiary:hover{background:rgba(198,38,158,0.08)}
+
+    /* Outcome summary at bottom: tailored next steps */
+    .outcome-card{
+      margin-top:20px;padding:16px;border-radius:var(--radius-md);border:1px solid var(--grey-300);background:var(--tcc-white);
+      box-shadow:var(--shadow-subtle)
+    }
+    .outcome-title{font-weight:600;margin-bottom:8px;color:var(--tcc-black)}
+    .outcome-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+    .outcome-step{padding:10px;border-radius:12px;background:var(--gold-100);border:1px solid var(--grey-300);color:var(--tcc-black)}
+    .outcome-step strong{display:block;margin-bottom:6px;font-weight:600}
+
+    /* Bottom CTA band */
+    .cta-final{
+      text-align:center;margin-top:32px;padding:24px;background:var(--gold-300);border-radius:var(--radius-lg);color:var(--tcc-black);
+      border:1px solid var(--grey-300);box-shadow:var(--shadow-subtle)
+    }
+    .cta-final h3{font-weight:600;font-size:1.4rem;margin-bottom:8px}
+    .cta-final .subtitle{font-size:1rem;color:var(--tcc-black);opacity:0.9;margin-bottom:14px}
+    .cta-final .button-primary{background:var(--tcc-magenta)}
+
+    /* Footer: softened */
+    .site-footer{
+      margin-top:32px;padding:16px;background:var(--tcc-white);color:var(--tcc-black);border-radius:var(--radius-md);
+      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:0.9rem;border:1px solid var(--grey-300);box-shadow:var(--shadow-subtle)
+    }
+    .footer-right{display:flex;gap:12px;flex-wrap:wrap}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .hero{grid-template-columns:minmax(0,1fr)}
+      .hero-right{order:-1}
+      .audit-shell{grid-template-columns:minmax(0,1fr)}
+      .audit-intro{border-right:none;padding-right:0;border-bottom:1px solid var(--grey-100);padding-bottom:16px}
+      .bands-grid,.outcome-steps{grid-template-columns:minmax(0,1fr)}
+      .site-header{position:static}
+    }
+    @media (max-width:640px){
+      .site-header{flex-direction:column;align-items:flex-start;gap:12px}
+      .hero{padding:22px 18px 22px}
+      .page-frame{padding-inline:16px}
+      .audit-shell{padding:16px 14px 18px}
+      .question-group{max-height:420px}
+      .bands-grid{gap:14px}
+    }
+  </style>
+</head>
+<body>
+  <div class="page-frame">
+    <!-- Header -->
+    <header class="site-header">
+      <div class="brand-lockup">
+        <div class="brand-mark">&</div>
+        <div>
+          <div class="brand-text-main">Thompson &amp; Co Collective</div>
+          <div class="brand-text-sub">Employer Brand &amp; Talent Strategy</div>
+        </div>
+      </div>
+      <div class="header-cta">
+        <button class="button-ghost" type="button" onclick="document.querySelector('#bands').scrollIntoView({behavior:'smooth'})">View Maturity Model</button>
+        <button class="button-primary" type="button" onclick="document.querySelector('#audit').scrollIntoView({behavior:'smooth'})">Start Mini Audit</button>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-left">
+        <div class="eyebrow">Employer Brand &amp; Recruitment Marketing</div>
+        <h1 class="hero-title">
+          Mini Audit for Talent Attraction <span class="hero-highlight">Leaders</span>
+        </h1>
+        <p class="hero-subtitle">
+          A 13-question diagnostic that shows where your talent engine sits on the curve:
+          <strong>Nascent, Developing, or Advanced.</strong> Zero fluff. Just a clear read on how
+          well your employer brand, recruitment marketing, and candidate experience are working as one system.
+        </p>
+        <div class="hero-cta-row">
+          <button class="button-primary" type="button" onclick="document.querySelector('#audit').scrollIntoView({behavior:'smooth'})">Begin 5-Minute Audit</button>
+          <button class="button-ghost" type="button" onclick="document.querySelector('#bands').scrollIntoView({behavior:'smooth'})">View Maturity Model</button>
+        </div>
+        <div class="hero-meta">
+          <span>13 statements</span>
+          <span class="divider">•</span>
+          <span>0–2 scale · 26-point score</span>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="score-card">
+          <div class="score-label">Live Audit Score Preview</div>
+          <div class="score-main">
+            <div class="score-value" id="scoreValue">0</div>
+            <div class="score-max">/ 26</div>
+            <div id="scoreBandPill" class="score-band-pill nascent">Nascent</div>
+          </div>
+          <div class="score-meter" aria-hidden="true">
+            <div class="score-meter-fill" id="scoreMeterFill"></div>
+          </div>
+          <div class="score-footnote" id="scoreFootnote">
+            As you rate each statement below, your score and maturity band will update here in real time.
+          </div>
+          <div class="band-grid" aria-hidden="true">
+            <div class="band-item"><strong>Nascent</strong> 0–10 points. Largely reactive and ad-hoc.</div>
+            <div class="band-item"><strong>Developing</strong> 11–19 points. Foundations in place, ready to connect the dots.</div>
+            <div class="band-item"><strong>Advanced</strong> 20–26 points. Integrated, measured, and ready to optimize.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bands / Maturity Model -->
+    <section id="bands" class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-eyebrow">Maturity Model</div>
+          <h2 class="section-title">Read your talent engine at a glance</h2>
+        </div>
+        <div class="section-kicker">
+          Each band is a different operating reality. The value is not the label; it is knowing
+          <strong>where to focus next</strong>: foundations, integration, or optimization.
+        </div>
+      </div>
+
+      <div class="bands-grid">
+        <article class="band-card">
+          <div class="band-tag">Nascent</div>
+          <div class="band-range">0–10 points</div>
+          <p class="band-copy">
+            Talent attraction is mostly reactive. Your brand story lives in slide decks and conversations,
+            not in your actual talent ecosystem.
+          </p>
+          <ul class="band-bullets">
+            <li>Limited or no documented EVP.</li>
+            <li>Careers site and JDs are generic or outdated.</li>
+            <li>Little to no consistent employer brand content.</li>
+          </ul>
+        </article>
+
+        <article class="band-card">
+          <div class="band-tag">Developing</div>
+          <div class="band-range">11–19 points</div>
+          <p class="band-copy">
+            You have strong ingredients, but they are fragmented. There is clear opportunity to connect
+            brand, channels, and data into one coherent system.
+          </p>
+          <ul class="band-bullets">
+            <li>EVP exists but is unevenly used.</li>
+            <li>Some campaigns perform well, but insights are not scaled.</li>
+            <li>Candidate experience varies by recruiter or business unit.</li>
+          </ul>
+        </article>
+
+        <article class="band-card">
+          <div class="band-tag">Advanced</div>
+          <div class="band-range">20–26 points</div>
+          <p class="band-copy">
+            Employer brand, recruitment marketing, and candidate experience are working together with
+            intentionality. Focus shifts to precision and experimentation.
+          </p>
+          <ul class="band-bullets">
+            <li>Insight-driven EVP is embedded across the funnel.</li>
+            <li>Channel and content performance guide investments.</li>
+            <li>Candidate feedback and data drive continuous improvement.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Audit form -->
+    <section id="audit" class="section">
+      <div class="section-header">
+        <div>
+          <div class="section-eyebrow">Mini Audit</div>
+          <h2 class="section-title">Benchmark your employer brand and recruitment marketing</h2>
+        </div>
+        <div class="pill-meta">13 statements · 0–2 scale · ~5 minutes</div>
+      </div>
+
+      <div class="audit-shell">
+        <aside class="audit-intro">
+          <h3>What this audit is designed to show</h3>
+          <p>
+            This is a leadership-level view of how mature your employer brand and recruitment marketing
+            capability really is. The output becomes the starting point for your roadmap, not a vanity score.
+          </p>
+          <div class="audit-highlights">
+            <ul>
+              <li><strong>Scope:</strong> strategy, EVP, channels, careers experience, data, and DEI.</li>
+              <li><strong>Owner:</strong> ideal for TA, EB, or People leaders.</li>
+              <li><strong>Use case:</strong> board updates, headcount planning, partner briefings.</li>
+            </ul>
+          </div>
+          <p class="audit-meta">
+            Once you have your score, Thompson &amp; Co Collective can translate it into a focused,
+            practical action plan for the next 90 days. No generic playbooks. Only moves that align with
+            your realities, budgets, and brand.
+          </p>
+        </aside>
+
+        <form class="audit-form" id="auditForm" onsubmit="event.preventDefault(); handleSubmit();">
+          <div class="field-row">
+            <div class="field">
+              <label for="company">Company</label>
+              <input id="company" name="company" type="text" placeholder="Company or organization name" required />
+            </div>
+            <div class="field">
+              <label for="name">Your name</label>
+              <input id="name" name="name" type="text" placeholder="First and last name" required />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="role">Role / Title</label>
+              <input id="role" name="role" type="text" placeholder="VP Talent, Head of TA, etc." required />
+            </div>
+            <div class="field">
+              <label for="email">Work email</label>
+              <input id="email" name="email" type="email" placeholder="you@company.com" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="priority">What is your most urgent hiring or talent challenge right now?</label>
+            <textarea id="priority" name="priority" placeholder="Briefly describe what is keeping you up at night."></textarea>
+          </div>
+
+          <div class="question-group" role="region" aria-labelledby="questions-heading">
+          <div class="question-header">
+            <div id="questions-heading" class="question-header-title">Rate each statement from 0 to 2</div>
+            <div class="question-header-meta">0 = Not in place · 1 = Partly true · 2 = Fully true and consistent</div>
+            <div class="progress-shell" aria-hidden="true">
+              <div class="progress-top">
+                <span id="progressLabel">0 / 13 answered</span>
+                <span id="progressPercent">0%</span>
+              </div>
+              <div class="progress-bar" role="presentation">
+                <div id="progressFill" class="progress-fill"></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="questionsContainer" aria-live="polite"></div>
+          <div class="scale-legend">Use your best judgment. This is a maturity read, not a compliance exam.</div>
+        </div>
+
+          <div class="score-card score-card-inline" aria-live="polite">
+            <div class="score-label">Live Audit Score Preview</div>
+            <div class="score-main">
+              <div class="score-value" id="scoreValueInline">0</div>
+              <div class="score-max">/ 26</div>
+              <div id="scoreBandPillInline" class="score-band-pill nascent">Nascent</div>
+            </div>
+            <div class="score-meter" aria-hidden="true">
+              <div class="score-meter-fill" id="scoreMeterFillInline"></div>
+            </div>
+            <div class="score-footnote" id="scoreFootnoteInline">
+              As you rate each statement, your score and maturity band will update here.
+            </div>
+            <div class="band-grid" aria-hidden="true">
+              <div class="band-item"><strong>Nascent</strong> 0–10 points. Largely reactive and ad-hoc.</div>
+              <div class="band-item"><strong>Developing</strong> 11–19 points. Foundations in place, ready to connect the dots.</div>
+              <div class="band-item"><strong>Advanced</strong> 20–26 points. Integrated, measured, and ready to optimize.</div>
+            </div>
+          </div>
+
+          <div class="form-footer">
+            <div class="form-disclaimer">
+              Submitting this form will email a copy of your results and a short set of recommendations. You can also export this to share with your executive team.
+              <div class="save-hint">We save your entries locally so you can finish later. Clear them anytime.</div>
+            </div>
+            <div>
+              <div class="score-live">
+                Current score: <strong id="liveScoreText">0 / 26</strong><br />
+                Maturity band: <span class="score-band-label" id="liveScoreBand">Nascent</span>
+              </div>
+              <button class="button-primary" type="submit" style="margin-top:6px;">Submit Audit &amp; Request Follow-Up</button>
+              <button class="button-tertiary" type="button" id="resetForm">Clear saved answers</button>
+            </div>
+          </div>
+
+          <div id="formStatus" role="status" aria-live="polite" style="display:none; margin-top:10px; font-size:0.9rem; color:var(--emerald-500);"></div>
+
+          <!-- Outcome summary (live next steps, at the bottom of form) -->
+          <div class="outcome-card" id="outcomeSummary">
+            <div class="outcome-title">Your band & next steps</div>
+            <div class="outcome-steps" id="outcomeSteps">
+              <!-- Populated by JS with 3 tailored next steps -->
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="cta-final">
+      <h3>Let’s Clarify Your Talent Story</h3>
+      <p class="subtitle">Book a 30‑minute strategy session to unpack your results and map next steps.</p>
+      <a href="https://thompsoncollective.co/hirecandice" class="button-primary">Schedule Your Call</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div>© <span id="year"></span> Thompson &amp; Co Collective. All rights reserved.</div>
+      <div class="footer-right">
+        <span>Where strategy meets extraordinary outcomes.</span>
+        <span>Charlotte, NC · Remote-first</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const STORAGE_KEY = 'tcc-mini-audit-state';
+
+    /****************************************************************
+     * QUESTIONS JSON (13 woven into main audit)
+     ****************************************************************/
+    const QUESTIONS = [
+      {id:"q1",text:"We have clearly defined 12–18 month hiring priorities tied to business strategy."},
+      {id:"q2",text:"We have clearly defined “mission-critical” roles and aligned profiles of what “great” looks like for each."},
+      {id:"q3",text:"We have a documented Employer Value Proposition built from real employee and candidate insight, not just leadership opinion."},
+      {id:"q4",text:"Recruiters and hiring managers consistently use the same core talent story when talking to candidates."},
+      {id:"q5",text:"We have clear, up-to-date personas for our most critical roles or talent segments."},
+      {id:"q6",text:"We understand what our target candidates care about most and who we lose them to — and use that insight to shape our message and strategy."},
+      {id:"q7",text:"We know which channels deliver our highest-quality hires and regularly shift budget and effort based on performance data."},
+      {id:"q8",text:"We publish consistent employer brand content beyond job posts (culture, growth, DEI, employee stories) as an always-on program."},
+      {id:"q9",text:"Our careers site clearly communicates why someone should work here and has been meaningfully updated in the last 12 months."},
+      {id:"q10",text:"Our job descriptions use plain, inclusive language and the application process is fast and easy on mobile devices."},
+      {id:"q11",text:"We have clear SLAs for candidate communication and a defined way to gather and act on candidate feedback (surveys, NPS)."},
+      {id:"q12",text:"We actively monitor and respond to employer reviews and intentionally amplify employee stories externally (social, careers content, testimonials)."},
+      {id:"q13",text:"DEI shows up authentically in our talent story, and we use data (conversion, source quality, time-to-hire, etc.) to regularly adjust recruitment marketing."}
+    ];
+
+    /****************************************************************
+     * RENDER QUESTIONS
+     ****************************************************************/
+    const container = document.getElementById('questionsContainer');
+
+    function renderQuestions(){
+      container.innerHTML = '';
+      QUESTIONS.forEach((q, idx) => {
+        const row = document.createElement('div');
+        row.className = 'question-row';
+        row.setAttribute('data-qid', q.id);
+
+        const text = document.createElement('div');
+        text.className = 'question-text';
+        text.textContent = `Q${idx + 1}. ${q.text}`;
+
+        const options = document.createElement('div');
+        options.className = 'ScaleOptions';
+        options.setAttribute('role','radiogroup');
+        options.setAttribute('aria-label', `Question ${idx+1} scale`);
+
+        [0,1,2].forEach(val => {
+          const label = document.createElement('label');
+          label.className = 'scale-pill';
+          label.tabIndex = 0;
+          label.setAttribute('role','radio');
+          label.setAttribute('aria-checked','false');
+          label.setAttribute('data-value', String(val));
+          label.setAttribute('data-q', q.id);
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = q.id;
+          input.value = String(val);
+          input.setAttribute('aria-hidden','true');
+
+          const span = document.createElement('span');
+          span.textContent = String(val);
+
+          label.appendChild(input);
+          label.appendChild(span);
+          options.appendChild(label);
+
+          // click and keyboard handlers
+          label.addEventListener('click', () => selectOption(q.id, val));
+          label.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectOption(q.id, val); }
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); focusNext(label); }
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); focusPrev(label); }
+          });
+        });
+
+        row.appendChild(text);
+        row.appendChild(options);
+        container.appendChild(row);
+      });
+
+      updateScore();
+      updateOutcomeSteps();
+      updateProgress();
+      loadSavedSelections();
+    }
+
+    function focusNext(el){
+      const siblings = Array.from(el.parentElement.querySelectorAll('.scale-pill'));
+      const i = siblings.indexOf(el);
+      if(i >= 0 && i < siblings.length - 1) siblings[i+1].focus();
+    }
+    function focusPrev(el){
+      const siblings = Array.from(el.parentElement.querySelectorAll('.scale-pill'));
+      const i = siblings.indexOf(el);
+      if(i > 0) siblings[i-1].focus();
+    }
+
+    /****************************************************************
+     * SELECTION & SCORE LOGIC
+     ****************************************************************/
+    function selectOption(qid, value){
+      const row = document.querySelector(`.question-row[data-qid="${qid}"]`);
+      if(!row) return;
+      const pills = row.querySelectorAll('.scale-pill');
+      pills.forEach(p => {
+        p.classList.remove('selected');
+        p.setAttribute('aria-checked','false');
+        const input = p.querySelector('input');
+        if(input) input.checked = false;
+      });
+
+      const selected = row.querySelector(`.scale-pill[data-value="${value}"]`);
+      if(selected){
+        selected.classList.add('selected');
+        selected.setAttribute('aria-checked','true');
+        const input = selected.querySelector('input');
+        if(input) input.checked = true;
+      }
+
+      updateScore();
+      updateOutcomeSteps();
+      updateProgress();
+      persistState();
+    }
+
+    function getCurrentScore(){
+      let total = 0;
+      QUESTIONS.forEach(q => {
+        const row = document.querySelector(`.question-row[data-qid="${q.id}"]`);
+        if(!row) return;
+        const sel = row.querySelector('.scale-pill.selected');
+        if(sel){
+          total += Number(sel.getAttribute('data-value') || 0);
+        }
+      });
+      return total;
+    }
+
+    function getBand(score){
+      if(score <= 10) return { label: 'Nascent', class: 'nascent' };
+      if(score <= 19) return { label: 'Developing', class: 'developing' };
+      return { label: 'Advanced', class: 'advanced' };
+    }
+
+    function updateScore(){
+      const score = getCurrentScore();
+      const band = getBand(score);
+      const percentage = Math.min(100, Math.round((score / 26) * 100));
+
+      // Hero score preview
+      document.getElementById('scoreValue').textContent = String(score);
+      const pill = document.getElementById('scoreBandPill');
+      pill.textContent = band.label;
+      pill.classList.remove('nascent','developing','advanced');
+      pill.classList.add(band.class);
+
+      // Meter fill
+      const fill = document.getElementById('scoreMeterFill');
+      if (fill) fill.style.width = `${percentage}%`;
+      const inlineFill = document.getElementById('scoreMeterFillInline');
+      if (inlineFill) inlineFill.style.width = `${percentage}%`;
+
+      // Inline score card next to the questions
+      const inlineValue = document.getElementById('scoreValueInline');
+      const inlinePill = document.getElementById('scoreBandPillInline');
+      if (inlineValue) inlineValue.textContent = String(score);
+      if (inlinePill){
+        inlinePill.textContent = band.label;
+        inlinePill.classList.remove('nascent','developing','advanced');
+        inlinePill.classList.add(band.class);
+      }
+
+      // Footer of form live score
+      document.getElementById('liveScoreText').textContent = `${score} / 26`;
+      document.getElementById('liveScoreBand').textContent = band.label;
+
+      // Footnote guidance
+      const scoreFootnote = document.getElementById('scoreFootnote');
+      const scoreFootnoteInline = document.getElementById('scoreFootnoteInline');
+      if (band.label === 'Nascent') {
+        scoreFootnote.textContent = "Nascent: foundations are forming. Focus on clarity of story, careers experience, and one reliable always-on channel.";
+        if (scoreFootnoteInline) scoreFootnoteInline.textContent = "Nascent: shore up your narrative, career touchpoints, and one always-on channel to start.";
+      } else if (band.label === 'Developing') {
+        scoreFootnote.textContent = "Developing: you have strong ingredients. Next, connect EVP, channels, and data into a coherent system.";
+        if (scoreFootnoteInline) scoreFootnoteInline.textContent = "Developing: connect EVP, channels, and data so the story and experience stay consistent.";
+      } else {
+        scoreFootnote.textContent = "Advanced: operating as a modern talent engine. The opportunity is precision, experimentation, and scale.";
+        if (scoreFootnoteInline) scoreFootnoteInline.textContent = "Advanced: lean into precision experiments and personalized journeys to keep lifting results.";
+      }
+
+      document.getElementById('progressFill').style.width = `${Math.min((score / 26) * 100, 100)}%`;
+    }
+
+    function updateProgress(){
+      const answered = getAnsweredCount();
+      const percent = Math.round((answered / QUESTIONS.length) * 100);
+      document.getElementById('progressLabel').textContent = `${answered} / ${QUESTIONS.length} answered`;
+      document.getElementById('progressPercent').textContent = `${percent}%`;
+      document.getElementById('progressFill').style.width = `${percent}%`;
+    }
+
+    function getAnsweredCount(){
+      let count = 0;
+      QUESTIONS.forEach(q => {
+        const row = document.querySelector(`.question-row[data-qid="${q.id}"]`);
+        const sel = row ? row.querySelector('.scale-pill.selected') : null;
+        if (sel) count += 1;
+      });
+      return count;
+    }
+
+    /****************************************************************
+     * Outcome next steps (bottom card)
+     ****************************************************************/
+    function getNextStepsForBand(bandLabel){
+      if (bandLabel === 'Nascent') {
+        return [
+          { title: 'Clarify EVP essentials', copy: 'Align leadership, recruiter story, and careers site to one plain-language talent narrative.' },
+          { title: 'Fix the core UX', copy: 'Tighten job descriptions and mobile apply flow; remove friction that blocks qualified candidates.' },
+          { title: 'Stand up one always-on channel', copy: 'Publish authentic employee stories weekly on your highest-yield platform.' }
+        ];
+      }
+      if (bandLabel === 'Developing') {
+        return [
+          { title: 'Connect strategy to channels', copy: 'Map top segments to content pillars and channel mix; make it repeatable.' },
+          { title: 'Train and align hiring managers', copy: 'Create SLAs, interview guides, and accountability for candidate experience.' },
+          { title: 'Instrument the funnel', copy: 'Track conversion by source, refine budget based on performance, and share insights.' }
+        ];
+      }
+      return [
+        { title: 'Run controlled experiments', copy: 'Test headlines, CTAs, and formats; iterate monthly to compound small wins.' },
+        { title: 'Personalize journeys', copy: 'Segment landing pages and nurture paths by role and seniority to lift quality.' },
+        { title: 'Scale advocacy', copy: 'Formalize referral incentives and amplify employee stories across top channels.' }
+      ];
+    }
+
+    function updateOutcomeSteps(){
+      const score = getCurrentScore();
+      const band = getBand(score).label;
+      const steps = getNextStepsForBand(band);
+      const container = document.getElementById('outcomeSteps');
+      container.innerHTML = steps.map(s => `
+        <div class="outcome-step">
+          <strong>${s.title}</strong>
+          <div>${s.copy}</div>
+        </div>
+      `).join('');
+    }
+
+    /****************************************************************
+     * STATE: local persistence for end users
+     ****************************************************************/
+    function persistState(){
+      const payload = {
+        company: document.getElementById('company').value || '',
+        name: document.getElementById('name').value || '',
+        role: document.getElementById('role').value || '',
+        email: document.getElementById('email').value || '',
+        priority: document.getElementById('priority').value || '',
+        answers: {}
+      };
+
+      QUESTIONS.forEach(q => {
+        const row = document.querySelector(`.question-row[data-qid="${q.id}"]`);
+        const sel = row ? row.querySelector('.scale-pill.selected') : null;
+        payload.answers[q.id] = sel ? Number(sel.getAttribute('data-value')) : null;
+      });
+
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      } catch (err) {
+        console.warn('Could not persist audit state', err);
+      }
+    }
+
+    function loadSavedSelections(){
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const data = JSON.parse(raw);
+        ['company','name','role','email','priority'].forEach(id => {
+          if (data[id]) {
+            const el = document.getElementById(id);
+            if (el) el.value = data[id];
+          }
+        });
+
+        if (data.answers) {
+          Object.entries(data.answers).forEach(([qid, val]) => {
+            if (val === null || val === undefined) return;
+            selectOption(qid, Number(val));
+          });
+        }
+      } catch (err) {
+        console.warn('Could not load saved audit state', err);
+      }
+    }
+
+    function clearSavedState(){
+      try { localStorage.removeItem(STORAGE_KEY); } catch (err) { console.warn(err); }
+    }
+
+    /****************************************************************
+     * FORM SUBMIT (demo + endpoint hook placeholder)
+     ****************************************************************/
+    function handleSubmit(){
+      const score = getCurrentScore();
+      const band = getBand(score).label;
+
+      const payload = {
+        company: document.getElementById('company').value || '',
+        name: document.getElementById('name').value || '',
+        role: document.getElementById('role').value || '',
+        email: document.getElementById('email').value || '',
+        priority: document.getElementById('priority').value || '',
+        score,
+        band,
+        answers: {}
+      };
+
+      QUESTIONS.forEach(q => {
+        const row = document.querySelector(`.question-row[data-qid="${q.id}"]`);
+        const sel = row ? row.querySelector('.scale-pill.selected') : null;
+        payload.answers[q.id] = sel ? Number(sel.getAttribute('data-value')) : null;
+      });
+
+      // Placeholder: replace with HubSpot or email endpoint when ready
+      // fetch('https://your-endpoint', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify(payload)
+      // }).then(() => /* show success */).catch(() => /* show error */);
+
+      clearSavedState();
+      const status = document.getElementById('formStatus');
+      status.style.display = 'block';
+      status.textContent = `Saved locally. Connect your form endpoint to send: ${payload.score} (${payload.band}) for ${payload.company || 'your company'}.`;
+    }
+
+    // Initialize
+    renderQuestions();
+
+    ['company','name','role','email','priority'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('input', () => {
+        persistState();
+      });
+    });
+
+    document.getElementById('resetForm').addEventListener('click', () => {
+      document.getElementById('auditForm').reset();
+      clearSavedState();
+      document.getElementById('formStatus').style.display = 'none';
+      document.querySelectorAll('.scale-pill').forEach(p => p.classList.remove('selected'));
+      updateScore();
+      updateOutcomeSteps();
+      updateProgress();
+    });
+
+    // Attach change listeners for live scoring state on radio inputs
+    document.addEventListener('change', (e) => {
+      const target = e.target;
+      if (target && target.matches('.ScaleOptions input[type="radio"]')) {
+        const name = target.name;
+        const group = document.querySelectorAll(`input[name="${name}"]`);
+        group.forEach(inp => {
+          const pill = inp.closest(".scale-pill");
+          if (!pill) return;
+          if (inp.checked) pill.classList.add("selected");
+          else pill.classList.remove("selected");
+        });
+        updateScore();
+        updateOutcomeSteps();
+        updateProgress();
+        persistState();
+      }
+    });
+  </script>
+</body>
+</html>
